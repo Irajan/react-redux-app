@@ -1,0 +1,10 @@
+GET http://localhost:4000/api/users/19
+Authorization: :Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTksIm5hbWUiOiJBZG1pbiBJcmFqYW4iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2MjM3NzY1Njd9.1dRhEJs7gD_1noAF5tflgdnZJJsb9hQ92mD7wI6LlF4
+###
+POST http://localhost:4000/login
+Content-Type: application/json
+
+{
+    "email":"example@admin.com",
+    "password":"password1"
+}
