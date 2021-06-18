@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import axios from "axios";
 
 import Form from "../components/form";
 import Button from "../components/button";
-import InputRow from "../components/input";
-import { login } from "../actions/actions";
+import InputRow from "../components/inputRow";
+
+import { login as loginAction } from "../actions/actions";
+import { error } from "../actions/actions";
+
+import { login } from "../services/publicService";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -19,28 +22,25 @@ function Login() {
     const user = { email, password };
 
     try {
-      const { data } = await axios.post("http://localhost:4000/login", user, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      dispatch(login(data.accessToken, data.id));
-      history.push("/dashboard");
+      const { data } = await login(user);
+      dispatch(loginAction(data.id, data.accessToken));
+      history.push("/profile");
     } catch (err) {
-      console.log(err.response.data);
+      dispatch(error(err));
     }
   }
 
   return (
-    <Form title="Login">
+    <Form title="Login" className={"form-wrapper"}>
       <InputRow
+        className={"form-row"}
         type="email"
         label="Email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
       <InputRow
+        className={"form-row"}
         type="password"
         label="Password"
         value={password}

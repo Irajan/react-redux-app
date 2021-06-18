@@ -1,15 +1,18 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import axios from "axios";
 
 import Form from "../components/form";
 import Button from "../components/button";
-import InputRow from "../components/input";
+import InputRow from "../components/inputRow";
+
 import { login } from "../actions/actions";
-import { END_POINT } from "../constants";
+import { error as errorAction } from "../actions/actions";
+
+import { register } from "../services/publicService";
 
 function Register() {
+  const [error, setError] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -20,29 +23,29 @@ function Register() {
   const history = useHistory();
 
   async function handleRegister() {
-    const user = { name, email, password, role };
-    const url = `${END_POINT}/register`;
-    const headers = {
-      "Content-Type": "application/json",
-    };
+    if (password !== secondPassword) {
+      setError("Both passwords must be same");
+      return;
+    }
 
     try {
-      const { data } = await axios.post(url, user, { headers });
+      const user = { name, email, password, role };
+      const { data } = await register(user);
       dispatch(login(data.password));
       history.push("/dashboard");
     } catch (err) {
-      console.log(err.response.data);
+      dispatch(errorAction(err));
     }
   }
 
   return (
     <Form title="Register">
+      <div className="err">{error}</div>
       <InputRow
         label="Name"
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
-
       <InputRow
         type="email"
         label="Email"
@@ -61,6 +64,7 @@ function Register() {
         value={secondPassword}
         onChange={(e) => setSecondPassword(e.target.value)}
       />
+
       <select onChange={(e) => setRole(e.target.value)} value={role}>
         <option value="admin">Admin</option>
         <option value="teacher">Teacher</option>
