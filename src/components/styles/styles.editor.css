@@ -1,0 +1,9 @@
+.icon-holder {
+  width: fit-content;
+}
+
+.icon {
+  margin: 0 5px;
+  display: inline-block;
+  cursor: pointer;
+}
