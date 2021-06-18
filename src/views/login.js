@@ -20,7 +20,6 @@ function Login() {
 
   async function handleLogIn() {
     const user = { email, password };
-
     try {
       const { data } = await login(user);
       dispatch(loginAction(data.id, data.accessToken));

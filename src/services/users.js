@@ -52,8 +52,8 @@ const update = function (userId, updateBody) {
  * @param {Number} userId
  * @returns {Promise}
  */
-const remove = function (userId, updateBody) {
-  return axios.patch(`${routeUrl}/${userId}`, updateBody, {
+const remove = function (userId) {
+  return axios.delete(`${routeUrl}/${userId}`, {
     headers: authHeader,
   });
 };

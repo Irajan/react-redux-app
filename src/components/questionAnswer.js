@@ -74,8 +74,7 @@ function QuestionAnswer({ question }) {
             setAnswerHidden(!answerHidden);
           }}
         >
-          {" "}
-          Show Answers
+          <span style={{ cursor: "pointer" }}>Show Answers</span>
         </div>
       </div>
       {!answerHidden && <Answers qid={question.id} />}

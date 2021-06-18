@@ -7,6 +7,12 @@ export function login(id, accessToken) {
   };
 }
 
+export function logout() {
+  return {
+    type: actionTypes.LOG_IN,
+  };
+}
+
 export function error(err) {
   const errMessage = err.response?.data || "No response from server !";
 

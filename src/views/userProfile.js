@@ -28,17 +28,14 @@ function UserProfile(props) {
         <div className="info-row">
           <span className="info-row__label">Name:</span>
           <span className="info-row__value">{user.name}</span>
-          <span className="info-row__edit">Edit</span>
         </div>
         <div className="info-row">
           <span className="info-row__label">Email:</span>
           <span className="info-row__value">{user.email}</span>
-          <span className="info-row__edit">Edit</span>
         </div>
         <div className="info-row">
           <span className="info-row__label">Role:</span>
           <span className="info-row__value">{user.role}</span>
-          <span className="info-row__edit">Edit</span>
         </div>
       </div>
       <div className="info-img-wrapper">
